@@ -18,4 +18,12 @@ export class UserService {
     const newUser = new this.model({ ...userDto, password: hash });
     return await newUser.save();
   }
+
+  async findAll(): Promise<IUser[]> {
+    return await this.model.find().exec();
+  }
+
+  async findOne(id: string): Promise<IUser> {
+    return await this.model.findById(id);
+  }
 }
