@@ -4,7 +4,6 @@ import { PassengerService } from './passenger.service';
 
 @Controller('api/v1/passenger')
 export class PassengerController {
-
   constructor(private readonly passengerService: PassengerService) {}
 
   @Post()
