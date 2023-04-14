@@ -18,4 +18,12 @@ export class PassengerService {
   async findAll(): Promise<IPassenger[]> {
     return await this.model.find().exec();
   }
+
+  async findOne(id: string): Promise<IPassenger> {
+    return await this.model.findById(id);
+  }
+
+  async update(id: string, passengerDto: any): Promise<IPassenger> {
+    return await this.model.findByIdAndUpdate(id, passengerDto, { new: true });
+  }
 }
