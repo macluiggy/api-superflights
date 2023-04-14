@@ -14,4 +14,8 @@ export class PassengerService {
     const newPassenger = new this.model(passengerDto);
     return await newPassenger.save();
   }
+
+  async findAll(): Promise<IPassenger[]> {
+    return await this.model.find().exec();
+  }
 }
