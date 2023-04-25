@@ -1,4 +1,5 @@
 import * as mongoose from 'mongoose';
+import { PASSENGER } from '../../common/models/models';
 
 export const FlightSchema = new mongoose.Schema({
   pilot: {
@@ -17,4 +18,12 @@ export const FlightSchema = new mongoose.Schema({
     type: Date,
     required: true,
   },
+  passengers: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: PASSENGER.name,
+    },
+  ],
 });
+
+FlightSchema.index({ flightDate: 1, destinationCity: 1 }, { unique: true });
