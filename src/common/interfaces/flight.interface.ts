@@ -3,4 +3,5 @@ export interface IFlight extends Document {
   airplane: string;
   destinationCity: string;
   flightDate: Date;
+  passengers: string[];
 }
