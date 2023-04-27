@@ -9,6 +9,15 @@ import { Model } from 'mongoose';
 @Injectable()
 export class UserService {
   constructor(@InjectModel(USER.name) private readonly model: Model<IUser>) {}
+
+  async findByUsername(username: string): Promise<IUser> {
+    return await this.model.findOne({ username });
+  }
+
+  async checkPassword(attempt: string, password: string): Promise<boolean> {
+    return await bcrypt.compare(attempt, password);
+  }
+
   async hashPassword(password: string): Promise<string> {
     const salt = await bcrypt.genSalt(10);
     return bcrypt.hash(password, salt);
@@ -38,6 +47,6 @@ export class UserService {
     return {
       status: HttpStatus.OK,
       msg: 'User deleted',
-    }
+    };
   }
 }
