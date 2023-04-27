@@ -24,11 +24,16 @@ export class AuthService {
     return null;
   }
 
-  async singIn(user: any) {
+  async signIn(user: any) {
     const payload = { username: user.username, sub: user._id };
+    const access_token = this.jwtService.sign(payload, {
+      secret: process.env.JWT_SECRET,
+      expiresIn: process.env.EXPIRES_IN,
+      audience: process.env.APP_URL,
+    });
 
     return {
-      access_token: this.jwtService.sign(payload),
+      access_token,
     };
   }
 
