@@ -17,12 +17,14 @@ export class HttpExceptionFilter implements ExceptionFilter {
       ? exception.getStatus()
       : HttpStatus.INTERNAL_SERVER_ERROR;
 
-    const msg = exception.getResponse ? exception.getResponse() : exception.message;
+    const msg = exception.getResponse
+      ? exception.getResponse()
+      : exception.message;
     console.error(exception);
-    
+
     this.logger.error(
       `Http Status: ${status}, Error Message: ${JSON.stringify(msg)}`,
-    )
+    );
     response.status(status).json({
       statusCode: status,
       timestamp: new Date().toISOString(),
